@@ -1,51 +1,8 @@
----ASSIGNMENT1---
-In this zip Folder I'm attaching one .py file which contain all the functions and classes which I've used in my Assignment
-one .ipynb file in which I've tried to solve to given problem.
-Two result images of 'Error vs Epoch' for 2 Different Boolean Functions depicting that Model is able to learn that Function as error goes down in each iteration.
------------------------------------------------------
-About the Code
------------------------------------------------------
-Assignment1_essentials.py files is one which contain functions and classes.
--> Imported the necessary libraries; Numpy, MatplotLib,Itertools
--> For n variables, the number of different input combinations is 2^n. This is calculated using num_of_inputs = 2 ** n
--> itertools.product is used to generate all possible combinations of n variables, where each variable can be either 0 or 1. This results in 2^n combinations. The    repeat=n parameter indicates that we're creating n-length combinations of [0, 1]
--> For each input combination, a Boolean function can output either 0 or 1. 
--> Since there are 2^n input combinations, the total number of possible Boolean functions is 2^(2^n)
--> It iterates over the range from 0 to 2^(2^n) - 1, converting each number to its binary representation.
--> Each binary number represents a different Boolean function (where the bits of the binary number correspond to the outputs for the input combinations in order)
----
--> Adding Bias term to inputs, np.c_ [np.ones(len(inputs)),np.array(inputs)] appends a column of ones to the input array.
--> inputs_with_bias.shape[1] is accessing the number of columns in the inputs_with_bias array as we have to assign weight to each parameter.
--> The perceptron learning loop is capped at 100 iterations to prevent infinite loops in cases where a solution cannot be found.
--> is_learnable is a boolean variable initialized to True.
--> loop iterates over each input-output pair (x, y), where x is a row from inputs_with_bias and y is the corresponding output.
--> Activation carries the weighted sum of inputs for the perceptron.
--> Prediction is determined based on whether the activation is greater than 0. If it is, the perceptron predicts 1; otherwise, it predicts 0
--> Error is difference between the actual output y and the perceptron's prediction.
--> if there is error then the weights are updated by adding the product of the learning rate, error, and input vector x to the current weights and is_learnable is    set to False.
--> After completing a pass through all input-output pairs, if is_learnable remains True, it indicates that the perceptron has successfully learned to classify      all inputs correctly. The function returns True to indicate that the Boolean function is learnable by a single perceptron.
----
--> Neural Network Framework; includes several key components such as layers, activation functions, loss functions, and the neural network class itself
--> Layer is base class for different types of layers in the neural network. It initializes common properties like input and output.
--> Dense class represents a fully connected layer in a neural network, it inherits its properties from Layer class.
--> input_size and output_size specify the number of input and output neurons in this layer.
--> self.weights: Initializes the weights of the layer with random values, self.bias: Initializes the biases for each neuron in the layer
--> forward method calculates the output of the layer during the forward pass i.e. nothing but the weighted sum of inputs
--> backward method calculates the gradients for weights and biases and updates them during the learning process
--> Activation class represents an activation layer, which applies a non-linear transformation to the output of the previous layer.
--> forward pass applies the activation function to the input, backward pass calculates the gradient of the loss with respect to the input using the derivative      of the activation function.
--> Defined various activation functions which inherits from Activation class, like tanh, Sigmoid
--> Softmax class represents a layer that applies the softmax function, used in the output layer for classification tasks with multiple classes although it's not    used in this Assignment.
--> Defined different loss functions like mse(mean squared error) loss, rmse(root mean square error) and their prime functions as they are used in backpropagation
--> NeuralNetwork class represents a neural network, which is a collection of layers.
--> __init__ method initializes an empty list, self.layers, which will store the layers of the network.
--> add method adds a new layer to the network ,train method trains the neural network using a dataset
--> taking following parameters x_train, y_train, loss, loss_prime, epochs=1000, learning_rate=0.01(how much to adjust weights and biases during training),          verbose=True(whether to print progress during training)
--> Looping over each training example using for x, y in zip(x_train.T, y_train.T), The .T transposes the training data matrices so that each column becomes a       training example, allowing the loop to iterate over each input-output pair.
--> x = x.reshape(-1, 1) and y = y.reshape(-1, 1)): Reshapes the input and output vectors to column vectors
--> This is important because the matrix operations in the network require inputs and outputs to be column vectors.
--> .predict(x) method to compute the output of the network for the input x. This method applies each layer’s forward method sequentially to produce the             network’s output.
--> then computing the loss for the current training example and adds it to the total error for the epoch.
--> followed by a backward pass through the network to update the weights and biases of each layer using backpropagation.
--> Finally ploting the error vs epochs curve.
-----
+This is an Assignment Problem assigned to all students who're enrolled in ELL784 INTRODUCTION TO MACHINE LEARNING 
+by Prof. Jayadeva in odd semester of 2024-25
+
+PROBLEM :
+We're supposed to do the following task:
+1) construct all possible Boolean Functions for given number of inputs.
+2) Check how many of those Boolean Functions are Learnable by a Single Perceptron Model.
+3) Make a two or more layer Network (from scratch) to make those Boolean Functions learnable.
